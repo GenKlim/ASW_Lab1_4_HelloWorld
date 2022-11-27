@@ -5,9 +5,9 @@ services:
         image: postgres:14-bullseye
         restart: always
         environment:
-            POSTGRES_PASSWORD: root
-            POSTGRES_DB: testdb
-            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: ${db_PASSWORD}
+            POSTGRES_DB: ${db_DB}
+            POSTGRES_USER: ${db_USER}
         ports:
             - 5432:5432
     server:
@@ -16,7 +16,7 @@ services:
         build:
             context: ./server/
             dockerfile: ./Dockerfile
-        command: npm run
+        command: ${server_CMD}
         ports:
             - 3000:3000
         volumes:
